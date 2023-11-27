@@ -38,7 +38,7 @@ const getApiBus = async (req,res)=>{
     })
 }
 
-const putApiBus = async (req,res)=>{
+const getApiBusById = async (req,res)=>{
     const {id} = req.params;
 
     const finddata = await Bus.findOne({_id:id});
@@ -47,8 +47,23 @@ const putApiBus = async (req,res)=>{
         data:finddata,
         message:"successfully fetch one bus"
     })
+} 
+
+const putApiBus = async(req,res)=>{
+    const { _id } = req.params;
+
+   const { busName, busNumber, totalSeats, availableSeats, bookSeats} = req.body;
+
+   await Bus.updateOne({_id:_id}, {$set:{busName, busNumber, totalSeats, availableSeats, bookSeats}})
+
+   const updateBus = await Bus.findById(_id);
+
+   return res.json({
+    success:true,
+    message:"successfully update"
+   })
 }
-export {postApiBus, getApiBus, putApiBus} ;
+export {postApiBus, getApiBus, getApiBusById, putApiBus} ;
 
 
 
