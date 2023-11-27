@@ -1,36 +1,32 @@
 import { Schema, model } from "mongoose";
 
-const BookingSchema = new Schema({
-    bus:{
-        type:Schema.Types.ObjectId,
-        ref:'bus',
-        required:true,    
-    },
-    passangerName:{
+const busSchema = new Schema({
+    busName: {
         type:String,
-        required:true,
-        unique:true
+        required:true
     },
-    mobileNumber:{
+    busNumber:{
         type:Number,
         required:true,
         unique:true
     },
-    seatNumber:{
+    totalSeats:{
         type:Number,
-        required:true,
-        unique:true
-    },
-    to:{
-        type:String,
         required:true
     },
-    from:{
-        type:String,
+    availableSeats:{
+        type:Number,
         required:true
     },
-
+    bookSeats:{
+        type:Number,
+        required:true
+    },
 },
 {
-    timestamps:true
+    timestamps: true
 })
+
+const bus = model('bus',busSchema)
+
+export default bus
