@@ -38,7 +38,17 @@ const getApiBus = async (req,res)=>{
     })
 }
 
-export {postApiBus, getApiBus} ;
+const putApiBus = async (req,res)=>{
+    const {id} = req.params;
+
+    const finddata = await Bus.findOne({_id:id});
+    res.json({
+        success:true,
+        data:finddata,
+        message:"successfully fetch one bus"
+    })
+}
+export {postApiBus, getApiBus, putApiBus} ;
 
 
 

@@ -2,7 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 dotenv.config();
-import {postApiBus, getApiBus} from "./controllers/Buses-controller.js"
+import {postApiBus, getApiBus, putApiBus} from "./controllers/Buses-controller.js"
 
 const app = express();
 app.use(express.json());
@@ -23,6 +23,7 @@ const PORT = process.env.PORT || 5000;
 
 app.post('/api/buses',postApiBus)
 app.get('/api/buses',getApiBus)
+app.get('/api/buses/:id',putApiBus)
 
 
 app.listen(PORT, (req,res)=>{
