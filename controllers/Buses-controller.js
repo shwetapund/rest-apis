@@ -63,10 +63,27 @@ const putApiBus = async(req,res)=>{
     message:"successfully update"
    })
 }
-export {postApiBus, getApiBus, getApiBusById, putApiBus} ;
 
+const patchApiBus = async (req,res)=>{
+  try{
+    const {_id} = req.params;  
+    const {busNumber} = req.body;
+    await Bus.updateOne({_id:_id}, {$set:{busNumber:busNumber}});
 
+    res.json({
+        success:true,
+        message:"successfully update"
+    })
+  }
+  catch(err){
+    return res.json({
+        success:false,
+        message:err.message
+    })
+  }
+}
 
+export {postApiBus, getApiBus, getApiBusById, patchApiBus,putApiBus} ;
 
 
 

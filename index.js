@@ -2,7 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 dotenv.config();
-import {postApiBus, getApiBus, getApiBusById, putApiBus} from "./controllers/Buses-controller.js"
+import {postApiBus, getApiBus, getApiBusById, putApiBus,patchApiBus} from "./controllers/Buses-controller.js"
 
 const app = express();
 app.use(express.json());
@@ -21,10 +21,11 @@ const PORT = process.env.PORT || 5000;
  
 //apis for bus
 
-app.post('/api/buses',postApiBus)
-app.get('/api/buses',getApiBus)
-app.get('/api/buses/:id',getApiBusById)
-app.put('/api/buses/:_id',putApiBus)
+app.post('/api/v1/buses',postApiBus)
+app.get('/api/v1/buses',getApiBus)
+app.get('/api/v1/buses/:id',getApiBusById)
+app.put('/api/v1/buses/:_id',putApiBus)
+app.patch('/api/v1/buses/:_id',patchApiBus)
 
 app.listen(PORT, (req,res)=>{
     console.log(`server is running on ${PORT}`)
