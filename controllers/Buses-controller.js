@@ -31,7 +31,7 @@ const postApiBus = async (req,res)=>{
 const getApiBus = async (req,res)=>{
     const findBuses = await Bus.find();
 
-    res.json({
+    res.status(200).json({
         success: true,
         data:findBuses,
         message:'successfully fetch all buses'
@@ -42,7 +42,7 @@ const getApiBusById = async (req,res)=>{
     const {id} = req.params;
 
     const finddata = await Bus.findOne({_id:id});
-    res.json({
+    res.status(200).json({
         success:true,
         data:finddata,
         message:"successfully fetch one bus"
@@ -58,7 +58,7 @@ const putApiBus = async(req,res)=>{
 
    const updateBus = await Bus.findById(_id);
 
-   return res.json({
+   return res.status(200).json({
     success:true,
     message:"successfully update"
    })
@@ -70,7 +70,7 @@ const patchApiBus = async (req,res)=>{
     const {busNumber} = req.body;
     await Bus.updateOne({_id:_id}, {$set:{busNumber:busNumber}});
 
-    res.json({
+    res.status(200).json({
         success:true,
         message:"successfully update"
     })
