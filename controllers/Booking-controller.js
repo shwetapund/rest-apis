@@ -51,4 +51,36 @@ const putApiBooking = async (req,res)=>{
     })
 }
 
-export {postApiBooking, getApiBooking, putApiBooking};
+const patchApiBooking = async (req,res)=>{
+    const {id} = req.params;
+
+    const { to, from} = req.body;
+
+    await Booking.updateOne({_id:id}, {$set: {to:to,from:from}})
+
+    res.json({
+        success:true,
+        message:"successfully update"
+    })
+
+}
+
+const deleteApiBooking = async (req,res)=>{
+   try{
+    const {id} = req.params;
+
+    const deleteBooking = await Booking.deleteOne({_id:id});
+    res.json({
+        success:true,
+        data:deleteBooking,
+        message:"successfully delete"
+    })
+   }
+   catch(err){
+    res.json({
+        success:false,
+        message:err.message
+    })
+   }
+}
+export {postApiBooking, getApiBooking, putApiBooking, patchApiBooking, deleteApiBooking};
