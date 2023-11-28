@@ -83,7 +83,20 @@ const patchApiBus = async (req,res)=>{
   }
 }
 
-export {postApiBus, getApiBus, getApiBusById, patchApiBus,putApiBus} ;
+const deleteApiBus = async (req,res)=>{
+    const {id} = req.params;
+
+    const deleteBus = await Bus.deleteOne({_id:id});
+
+    res.json({
+        success:true,
+        data:deleteBus,
+        message:"successfully deleted bus"
+    })
+}
+
+
+export {postApiBus, getApiBus, getApiBusById, patchApiBus,putApiBus, deleteApiBus} ;
 
 
 
